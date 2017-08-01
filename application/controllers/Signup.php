@@ -77,9 +77,10 @@ class Signup extends MY_Controller
             // redirect('login');
         }
     }
-
+   /* check Singup */
     public function checkSingup($data)
     {
+        // load curl library
         $this->load->library('curl');
         if(empty($data)){
             return;
@@ -90,8 +91,8 @@ class Signup extends MY_Controller
         $this->curl->create($url);
         $this->curl->post($data);
         $result = json_decode($this->curl->execute());
-
-        if(isset($result->status) && $result->status->success == 12){
+        // check data result 
+        if(isset($result->status) && $result->status->success == 1){
             redirect('login');
         } else{
             redirect('signup');
