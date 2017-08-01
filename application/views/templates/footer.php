@@ -12,7 +12,8 @@
                   monthFormat:'numeric',
                   monthSuffixes: false,
                   daySuffixes: false,
-                  dropdownClass: 'date-control'
+                  dropdownClass: 'birthday-control form-control',
+
             });
             $('#signup').validator();
         });

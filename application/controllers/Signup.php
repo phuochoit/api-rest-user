@@ -71,8 +71,30 @@ class Signup extends MY_Controller
                 'ip' => $this->input->ip_address()
                 
             );
+           $this->checkSingup($data);
+
             // reirect login if singup sussect
+            // redirect('login');
+        }
+    }
+
+    public function checkSingup($data)
+    {
+        $this->load->library('curl');
+        if(empty($data)){
+            return;
+        }
+
+        $url = 'http://125.212.253.128:8080/api-rest-user/service/user/signup';
+        
+        $this->curl->create($url);
+        $this->curl->post($data);
+        $result = json_decode($this->curl->execute());
+
+        if(isset($result->status) && $result->status->success == 12){
             redirect('login');
+        } else{
+            redirect('signup');
         }
     }
 }

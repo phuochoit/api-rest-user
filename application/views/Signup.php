@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <h2>Đăng Ký</h2>
-        <p>Luôn miễn phí.</p>
         <?php
             $attributes = array('class' => 'form-horizontal', 'id' => 'signup');
             print form_open('signup/signup', $attributes);
@@ -47,7 +46,7 @@
             <div class="form-group ">
                 <div class="col-sm-12 col-md-6">
                     <label for="drbirthday">Ngày Sinh</label>
-                    <input id="ipbirthday" value="" readonly="readonly" type="text"  name="birthday" required>
+                    <input id="ipbirthday" value="<?php print date('d-m-y');?>" readonly="readonly" type="text"  name="birthday" required>
                     <?php if(form_error('birthday')):?>
                         <div class="alert-signup alert alert-danger alert-dismissible fade in" role="alert"> 
                             <?php print form_error('birthday'); ?>
