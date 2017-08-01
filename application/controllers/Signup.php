@@ -6,10 +6,12 @@ class Signup extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library("session");
     }
     /*Load Default*/
     public function index()
     {
+        
         $this->load->helper('form');
         $this->page = "Signup";
         $this->layout();
@@ -42,8 +44,18 @@ class Signup extends MY_Controller
                 'rules' => 'required'
             ),
             array(
-                'field' => 'birthday',
-                'label' => 'Birthday',
+                'field' => 'birthday_day',
+                'label' => 'Day',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'birthday_month',
+                'label' => 'Month',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'birthday_year',
+                'label' => 'Year',
                 'rules' => 'required'
             ),
             array(
@@ -60,17 +72,19 @@ class Signup extends MY_Controller
             $this->layout();
         } else {
             // get data fron input
-            $dataInput = $this->input->post(array('firstname', 'lastname','phoneormail','password','birthday','radiogender'));
+            $dataInput = $this->input->post(array('firstname', 'lastname','phoneormail','password','birthday_day','birthday_month','birthday_year','radiogender'));
+            $birthday = $dataInput['birthday_day'].$dataInput['birthday_month'].$dataInput['birthday_year'];
             $data = array(
                 'firstname' => $dataInput['firstname'],
                 'lastname' => $dataInput['lastname'],
                 'email' => $dataInput['phoneormail'],
                 'password' => $dataInput['password'],
-                'birthday' => $dataInput['birthday'],
+                'birthday' => date("d/M/y",$birthday),
                 'gender' => $dataInput['radiogender'],
                 'ip' => $this->input->ip_address()
                 
             );
+
            $this->checkSingup($data);
 
             // reirect login if singup sussect
@@ -95,7 +109,7 @@ class Signup extends MY_Controller
         if(isset($result->status) && $result->status->success == 1){
             redirect('login');
         } else{
-            redirect('signup');
+            $this->session->set_flashdata('errorSingup',  "signup not success");
         }
     }
 }
