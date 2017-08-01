@@ -4,12 +4,13 @@ class MY_Controller extends CI_Controller
 {
     
     protected $data = array();
+    protected $bodyClass;
 
     public function __construct()
     {
         parent::__construct();
     }
-    /*custom layout */ 
+    /*custom layout */
     public function layout()
     {
         $this->template['header'] = $this->load->view('templates/header', $this->data, true);

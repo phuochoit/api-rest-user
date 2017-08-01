@@ -1,8 +1,74 @@
-.alert-signup  {
+.alert-signup {
     margin-top: 10px;
 }
 .birthday-control {
     display: inline-block;
     float: left;
     width: 33%;
-}}
+}
+.status-title {
+    color: #1d2129;
+    font-size: 19px;
+}
+.title {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.page-signup,
+.page-login {
+    background: #e9ebee none repeat scroll 0 0;
+}
+.page-signup #signup input,
+.page-login #login input {
+    font-size: 18px;
+    height: 40px;
+}
+.page-signup #signup .bg-danger {
+    margin-top: 5px;
+    padding: 10px;
+    color: #fff;
+    background: #b94a48;
+}
+.page-signup #signup .error {
+    display: none;
+}
+.page-signup #signup .show_error {
+    display: block;
+}
+.label-birthday {
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.select-birthday {
+    display: inline-block;
+    float: left;
+    width: 30%;
+    margin-right: 10px;
+}
+.select-birthday:last-child {
+    margin-right: 0px;
+}
+.page-signup #signup input[type='radio'] {
+    height: inherit;
+}
+.lable-gender {
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 0;
+    margin-top: -5px;
+}
+#signup_submit,
+.btn-login {
+    background: #69a74e linear-gradient(#67ae55, #578843) repeat scroll 0 0;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    box-shadow: 0 1px 1px #a4e388 inset;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px 35px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}

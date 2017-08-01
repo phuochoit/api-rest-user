@@ -15,7 +15,6 @@ class Signup extends MY_Controller
         $this->load->helper('form');
         $this->page = "Signup";
         $this->layout();
-       
     }
     /* signup */
     public function signup()
@@ -79,13 +78,12 @@ class Signup extends MY_Controller
                 'lastname' => $dataInput['lastname'],
                 'email' => $dataInput['phoneormail'],
                 'password' => $dataInput['password'],
-                'birthday' => date("d/M/y",$birthday),
+                'birthday' => date("d/M/y", $birthday),
                 'gender' => $dataInput['radiogender'],
                 'ip' => $this->input->ip_address()
                 
             );
-
-           $this->checkSingup($data);
+            $this->checkSingup($data);
 
             // reirect login if singup sussect
             // redirect('login');
@@ -96,7 +94,7 @@ class Signup extends MY_Controller
     {
         // load curl library
         $this->load->library('curl');
-        if(empty($data)){
+        if (empty($data)) {
             return;
         }
 
@@ -105,11 +103,11 @@ class Signup extends MY_Controller
         $this->curl->create($url);
         $this->curl->post($data);
         $result = json_decode($this->curl->execute());
-        // check data result 
-        if(isset($result->status) && $result->status->success == 1){
+        // check data result
+        if (isset($result->status) && $result->status->success == 1) {
             redirect('login');
-        } else{
-            $this->session->set_flashdata('errorSingup',  "signup not success");
+        } else {
+            $this->session->set_flashdata('errorSingup', "signup not success");
         }
     }
 }

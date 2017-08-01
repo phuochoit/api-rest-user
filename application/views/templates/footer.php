@@ -5,48 +5,84 @@
 
     <script>
         $(document).ready(function() {
-            $('#iplastname').on('input', function() {
-                var input=$(this);
-                var is_name=input.val();
-                if(is_name){
-                    input.removeClass("invalid").addClass("valid");
-                } else {
-                    input.removeClass("valid").addClass("invalid");
+            $('#signup').submit(function(){
+                var lastname    = $.trim($('#iplastname').val());
+                var firstname   = $.trim($('#ipfirstname').val());
+                var phoneormail = $.trim($('#ipphoneormail').val());
+                var password    = $.trim($('#ippassword').val());
+                var radiogender   =  $('input[name=radiogender]:checked').val();
+
+                var flag = true;
+
+                if (lastname == '' ){
+                    $('#lastname_error').text('Họ bạn là gì?');
+                    $('#lastname_error').removeClass("error").addClass("show_error");
+                    
+                    flag = false;
+                }  else{
+                    $('#lastname_error').text('');
+                    $('#lastname_error').removeClass("show_error").addClass("error");
                 }
-            });
-            $('#iplastname').keyup(function(event) {
-                var input=$(this);
-                var message=$(this).val();
-                console.log(message);
-                if(message){input.removeClass("invalid").addClass("valid");}
-                else{input.removeClass("valid").addClass("invalid");}	
+
+                if (firstname == '' ){
+                    $('#firstname_error').text('Tên bạn là gì?');
+                    $('#firstname_error').removeClass("error").addClass("show_error");
+                    flag = false;
+                }  else{
+                    $('#firstname_error').text('');
+                    $('#firstname_error').removeClass("show_error").addClass("error");
+                }
+
+                if (phoneormail == '' ){
+                    $('#phoneormail_error').text('Số điện thoại hoặc email của bạn là gì?');
+                    $('#phoneormail_error').removeClass("error").addClass("show_error");
+                    flag = false;
+                }  else{
+                    $('#phoneormail_error').text('');
+                    $('#phoneormail_error').removeClass("show_error").addClass("error");
+                }
+
+                if (password == '' ){
+                    $('#password_error').text('Mật Khẩu của bạn là gì?');
+                    $('#password_error').removeClass("error").addClass("show_error");
+                    flag = false;
+                }  else{
+                    $('#password_error').text('');
+                    $('#password_error').removeClass("show_error").addClass("error");
+                }
+
+                if (radiogender == undefined || radiogender == 0){
+                    $('#radiogender_error').text('Giới tính của bạn là gì?');
+                    $('#radiogender_error').removeClass("error").addClass("show_error");
+                    flag = false;
+                }  else{
+                    $('#radiogender_error').text('');
+                    $('#radiogender_error').removeClass("show_error").addClass("error");
+                }
+
+                return flag;
             });
 
-            $('#signup').keyup(function(event) {
-                var input=$(this);
-                var message=$(this).val();
-                console.log(message);
-                if(message){input.removeClass("invalid").addClass("valid");}
-                else{input.removeClass("valid").addClass("invalid");}	
+            $('#signup input').keyup(function(event) {
+                var input = $(this);
+                var message = $(this).val();
+                var form_data = $(this).serializeArray();
+                if(message.length > 0 ){
+                    $("#"+ form_data[0]['name'] +"_error").text('');
+                    $("#"+ form_data[0]['name'] +"_error").removeClass("show_error").addClass("error");
+                }  
             });
+            $('#signup input[type=radio]').change(function() {
+                var input = $(this);
+                var message = $(this).val();
+                var form_data = $(this).serializeArray();
 
-            $("#signup button").click(function(event){
-				var form_data=$("#signup").serializeArray();
-				var error_free=true;
-				for (var input in form_data){
-					var element=$("#contact_"+form_data[input]['name']);
-					var valid=element.hasClass("valid");
-					var error_element=$("span", element.parent());
-					if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
-					else{error_element.removeClass("error_show").addClass("error");}
-				}
-				if (!error_free){
-					event.preventDefault(); 
-				}
-				else{
-					alert('No errors: Form will be submitted');
-				}
-			});
+                if(message.length > 0 ){
+                    $("#"+ form_data[0]['name'] +"_error").text('');
+                    $("#"+ form_data[0]['name'] +"_error").removeClass("show_error").addClass("error");
+                } 
+
+            });
         });
     </script>
 

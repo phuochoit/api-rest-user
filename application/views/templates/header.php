@@ -7,6 +7,12 @@
         <link href="<?php print base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet">
         <link href="<?php print base_url("assets/css/style.css");?>" rel="stylesheet">
     </head>
-    <body>
+
+    <?php
+        $fetch_class = 'page-'.$this->router->fetch_class();
+        $fetch_method = $this->router->fetch_method();
+        $class= $fetch_class .' '.$fetch_method;
+    ?>
+    <body  class="<?php print $class?>">
    
     <div class="container">
