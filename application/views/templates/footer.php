@@ -5,6 +5,16 @@
 
     <script>
         $(document).ready(function() {
+            var flag = true;
+            function isEmailOrPhone(email) {
+                var expression = /([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$)|((?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$)/;
+                if (expression.test(email)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
             $('#signup').submit(function(){
                 var lastname    = $.trim($('#iplastname').val());
                 var firstname   = $.trim($('#ipfirstname').val());
@@ -14,7 +24,7 @@
                 var birthday_day = $("select[name=birthday_day] option:selected").val();
                 var birthday_month = $("select[name=birthday_month] option:selected").val();
                 var birthday_year = $("select[name=birthday_year] option:selected").val();
-                var flag = true;
+              
 
                 if (lastname == '' ){
                     $('#lastname_error').text('Họ bạn là gì?');
@@ -35,7 +45,7 @@
                     $('#firstname_error').removeClass("show_error").addClass("error");
                 }
 
-                if (phoneormail == '' ){
+                if (!isEmailOrPhone(phoneormail)){
                     $('#phoneormail_error').text('Số điện thoại hoặc email của bạn là gì?');
                     $('#phoneormail_error').removeClass("error").addClass("show_error");
                     flag = false;
@@ -78,10 +88,22 @@
                 var input = $(this);
                 var message = $(this).val();
                 var form_data = $(this).serializeArray();
-                if(message.length > 0 ){
+
+                if(message.length > 0 && form_data[0]['name'] != 'phoneormail'){
                     $("#"+ form_data[0]['name'] +"_error").text('');
                     $("#"+ form_data[0]['name'] +"_error").removeClass("show_error").addClass("error");
-                }  
+                }
+                
+                if(form_data[0]['name'] == 'phoneormail'){
+                    if (isEmailOrPhone(form_data[0]['value'])){
+                        $("#"+ form_data[0]['name'] +"_error").text('');
+                        $("#"+ form_data[0]['name'] +"_error").removeClass("show_error").addClass("error");
+                    }else{
+                        $("#"+ form_data[0]['name'] +"_error").text('Số điện thoại hoặc email của bạn là gì?');
+                        $("#"+ form_data[0]['name'] +"_error").removeClass("error").addClass("show_error");
+                        flag = false;
+                    }
+                }
             });
             $('#signup input[type=radio]').change(function() {
                 var input = $(this);
@@ -96,7 +118,7 @@
             });
 
             $('#signup select.select-birthday').change(function() {
-               var birthday_day = $("select[name=birthday_day] option:selected").val();
+                var birthday_day = $("select[name=birthday_day] option:selected").val();
                 var birthday_month = $("select[name=birthday_month] option:selected").val();
                 var birthday_year = $("select[name=birthday_year] option:selected").val();
 
