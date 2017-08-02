@@ -5,7 +5,7 @@
 
     <script>
         $(document).ready(function() {
-            var flag = true;
+            
             function isEmailOrPhone(email) {
                 var expression = /([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$)|((?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$)/;
                 if (expression.test(email)) {
@@ -16,6 +16,7 @@
             }
 
             $('#signup').submit(function(){
+                var flag = true;
                 var lastname    = $.trim($('#iplastname').val());
                 var firstname   = $.trim($('#ipfirstname').val());
                 var phoneormail = $.trim($('#ipphoneormail').val());
@@ -101,7 +102,6 @@
                     }else{
                         $("#"+ form_data[0]['name'] +"_error").text('Số điện thoại hoặc email của bạn là gì?');
                         $("#"+ form_data[0]['name'] +"_error").removeClass("error").addClass("show_error");
-                        flag = false;
                     }
                 }
             });
