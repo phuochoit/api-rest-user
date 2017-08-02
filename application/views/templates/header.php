@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?php print base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet">
         <link href="<?php print base_url("assets/css/style.css");?>" rel="stylesheet">
+        <link href="<?php print base_url("assets/css/reponsize.css");?>" rel="stylesheet">
     </head>
 
     <?php

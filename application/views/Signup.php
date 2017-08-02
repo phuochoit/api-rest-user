@@ -16,7 +16,7 @@
             print form_open('signup/signup', $attributes);
         ?>
             <div class="form-group">
-                <div class="col-sm-12 col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 form-col">
                     <input type="text" class="form-control" id="iplastname" placeholder="Họ" name="lastname" value="<?php print set_value('lastname'); ?>">
                     <p id="lastname_error" class="bg-danger error"></p>
                     <?php if (form_error('lastname')) :?>
@@ -25,7 +25,7 @@
                         </div>
                     <?php endif;?>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 form-col">
                     <input type="text" class="form-control" id="ipfirstname" placeholder="Tên"  name="firstname" value="<?php echo set_value('firstname'); ?>">
                     <p id="firstname_error"  class="bg-danger error"></span>
                     <?php if (form_error('firstname')) :?>
@@ -58,8 +58,10 @@
                 </div>
             </div>
             <div class="form-group ">
-                <div class="col-sm-12 col-md-7">
+                <div class="col-sm-12 col-md-12">
                     <label for="drbirthday" class="label-birthday">Ngày Sinh</label>
+                </div>
+                <div class="col-sm-7 col-md-7 col-xs-12 form-col ">
                     <select class="form-control select-birthday" name="birthday_day" title="Ngày">
                          <option value="">Ngày</option>  
                         <?php for ($d=1; $d <= 31; $d++) {  ?>
@@ -84,6 +86,11 @@
                             <p>The Birthday field is required.</p>
                         </div>
                     <?php endif;?>
+
+                    <p id="birthday_error" class="bg-danger error" ></p>
+                </div>
+                <div class="col-sm-5 col-md-5 col-xs-12 form-col">
+                    <a class="mlm _58ms" id="birthday-help" href="#" ajaxify="#" title="Nhấp chuột để biết thêm thông tin" rel="async" role="button">Tại sao tôi cần cung cấp ngày sinh của mình?</a>
                 </div>
             </div>
             <div class="form-group">
@@ -106,6 +113,11 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="col-sm-12 col-md-12">
+                    <p class="descrition">Bằng cách nhấp vào Tạo tài khoản, bạn đồng ý với <a href="#">Điều khoản</a> của chúng tôi và rằng bạn đã đọc <a href="#">Chính sách dữ liệu</a> của chúng tôi, bao gồm <a href="#">Sử dụng cookie</a>. Bạn có thể nhận được thông báo qua SMS từ Facebook và có thể bỏ chọn bất kỳ lúc nào.</p>
+                </div>
+            </div>
+            <div class="form-group form-group-submit">
                 <div class="col-sm-12 col-md-6 col-md-offset-3">
                     <button type="submit" id="signup_submit" class="btn btn-default">Tạo Tài Khoản</button>
                 </div>

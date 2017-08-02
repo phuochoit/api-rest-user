@@ -11,7 +11,9 @@
                 var phoneormail = $.trim($('#ipphoneormail').val());
                 var password    = $.trim($('#ippassword').val());
                 var radiogender   =  $('input[name=radiogender]:checked').val();
-
+                var birthday_day = $("select[name=birthday_day] option:selected").val();
+                var birthday_month = $("select[name=birthday_month] option:selected").val();
+                var birthday_year = $("select[name=birthday_year] option:selected").val();
                 var flag = true;
 
                 if (lastname == '' ){
@@ -60,6 +62,15 @@
                     $('#radiogender_error').removeClass("show_error").addClass("error");
                 }
 
+                if(birthday_day == '' || birthday_year == '' || birthday_month == ''){
+                    $('#birthday_error').text('Ngày sinh của bạn là gì?');
+                    $('#birthday_error').removeClass("error").addClass("show_error");
+                    flag = false;
+
+                } else{
+                    $('#birthday_error').text('');
+                    $('#birthday_error').removeClass("show_error").addClass("error");
+                }
                 return flag;
             });
 
@@ -82,6 +93,17 @@
                     $("#"+ form_data[0]['name'] +"_error").removeClass("show_error").addClass("error");
                 } 
 
+            });
+
+            $('#signup select.select-birthday').change(function() {
+               var birthday_day = $("select[name=birthday_day] option:selected").val();
+                var birthday_month = $("select[name=birthday_month] option:selected").val();
+                var birthday_year = $("select[name=birthday_year] option:selected").val();
+
+                if(birthday_day != '' && birthday_month != '' && birthday_year != ''){
+                    $("#birthday_error").text('');
+                    $("#birthday_error").removeClass("show_error").addClass("error");
+                }
             });
         });
     </script>
