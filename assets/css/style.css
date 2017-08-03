@@ -23,16 +23,19 @@
     font-size: 18px;
     height: 40px;
 }
-.page-signup #signup .bg-danger {
+.page-signup #signup .bg-danger,
+#login .bg-danger {
     margin-top: 5px;
     padding: 10px;
     color: #fff;
     background: #b94a48;
 }
-.page-signup #signup .error {
+.page-signup #signup .error,
+#login .error {
     display: none;
 }
-.page-signup #signup .show_error {
+.page-signup #signup .show_error,
+#login .show_error {
     display: block;
 }
 .label-birthday {
@@ -72,17 +75,57 @@
     padding: 5px 35px;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
+
+.form-group-submit #signup_submit:hover,
+.form-group-submit .btn-login:hover,
+.form-group-submit .btn-login:active,
+.form-group-submit #signup_submit:hover {
+    background: #69a74e linear-gradient(#67ae55, #578843) repeat scroll 0 0;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    box-shadow: 0 1px 1px #a4e388 inset;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px 35px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
 #birthday-help {
     color: #365899;
     font-size: 14px;
 }
-.descrition{    
+.descrition {
     color: #777;
     font-size: 14px;
 }
 
-#birthday_error{
+#birthday_error {
     display: block;
     float: left;
     width: 100%;
+}
+
+.container-btn-login {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.container-btn-login a {
+    padding: 11px 20px;
+    font-size: 16px;
+    min-width: 250px;
+}
+
+.login-facebook a {
+    background: #3b5998;
+    border-color: #3b5998;
+}
+
+.login-google a {
+    background: #f32e06;
+    border-color: #f32e06;
+}
+.form-group.form-group-submit > div {
+    text-align: center;
+    margin: 0 auto;
+    float: none;
 }

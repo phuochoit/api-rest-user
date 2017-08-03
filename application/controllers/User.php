@@ -7,7 +7,10 @@ class User extends MY_Controller
     {
         parent::__construct();
         $this->load->library('facebook');
-        // $this->session->sess_destroy();
+//         $this->session->sess_destroy();
+//         print '<pre>';		
+//  -      print_r($this->session->all_userdata());		
+//  -      print '</pre>';
         
     }
     public function index()
@@ -26,6 +29,7 @@ class User extends MY_Controller
     }
 
     public function ggLogin(){
+       
         $this->load->config('oauth');
         // Include the google api php libraries
         include_once APPPATH."libraries/Google/Google_Client.php";
@@ -78,17 +82,16 @@ class User extends MY_Controller
             
             $userData['logoutUrl'] = $this->config->item('google_logout_redirect_url');
 
-            var_dump($userData);
         } else {
             $userData['authUrl'] = $gClient->createAuthUrl();
         }
 
         return $userData;
-
     }
 
 
     public function fbLogin(){
+
         $userData = array();
         $userFBData = array();
         if($this->facebook->is_authenticated()){
@@ -134,7 +137,6 @@ class User extends MY_Controller
         // Remove google user data from session
 		$this->session->unset_userdata('gg_token_login');
 		$this->session->unset_userdata('gg_data_login');
-        $this->session->sess_destroy();
 		redirect('/user');
     }
 }

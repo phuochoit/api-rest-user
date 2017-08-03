@@ -15,7 +15,7 @@
                 }
             }
 
-            $('#signup').submit(function(){
+            $('#signup,#login').submit(function(){
                 var lastname    = $.trim($('#iplastname').val());
                 var firstname   = $.trim($('#ipfirstname').val());
                 var phoneormail = $.trim($('#ipphoneormail').val());
@@ -100,11 +100,12 @@
                         $("#"+ form_data[0]['name'] +"_error").text('');
                         $("#"+ form_data[0]['name'] +"_error").removeClass("show_error").addClass("error");
                         flag = true;
-                    }else{
-                        $("#"+ form_data[0]['name'] +"_error").text('Số điện thoại hoặc email của bạn là gì?');
-                        $("#"+ form_data[0]['name'] +"_error").removeClass("error").addClass("show_error");
-                        flag = false;
-                    }
+                    }  
+                    // }else{
+                    //     $("#"+ form_data[0]['name'] +"_error").text('Số điện thoại hoặc email của bạn là gì?');
+                    //     $("#"+ form_data[0]['name'] +"_error").removeClass("error").addClass("show_error");
+                        
+                    // }
                 }
             });
             $('#signup input[type=radio]').change(function() {
