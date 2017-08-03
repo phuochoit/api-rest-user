@@ -105,7 +105,7 @@ class Signup extends MY_Controller
         $result = json_decode($this->curl->execute());
         // check data result
         if (isset($result->status) && $result->status->success == 1) {
-            redirect('login');
+            redirect('user');
         } else {
             $this->session->set_flashdata('errorSingup', "signup not success");
         }

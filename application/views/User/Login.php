@@ -1,6 +1,15 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <h2 class="title">Đăng Nhập</h2>
+
+        <?php
+            if(!empty($FBdata['authUrl'])) {
+                echo '<a href="'.htmlspecialchars($FBdata['authUrl']).'"><img src="'.base_url('assets/image/facebook-login.png').'" alt=""/></a>';
+            }else{
+                echo '<a href="'.htmlspecialchars($FBdata['logoutUrl']).'"><img src="'.base_url('assets/image/facebook-login.png').'" alt=""/></a>';
+            }
+        ?>
+
         <?php
         $attributes = array('class' => 'form-horizontal', 'id' => 'login');
         print form_open('login', $attributes);

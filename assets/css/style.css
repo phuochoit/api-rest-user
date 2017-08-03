@@ -15,11 +15,11 @@
     margin-bottom: 20px;
 }
 .page-signup,
-.page-login {
+.page-user {
     background: #e9ebee none repeat scroll 0 0;
 }
 .page-signup #signup input,
-.page-login #login input {
+.page-user #login input {
     font-size: 18px;
     height: 40px;
 }
