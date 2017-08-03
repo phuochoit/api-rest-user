@@ -84,9 +84,6 @@ class Signup extends MY_Controller
                 
             );
             $this->checkSingup($data);
-
-            // reirect login if singup sussect
-            // redirect('login');
         }
     }
    /* check Singup */

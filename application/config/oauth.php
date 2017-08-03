@@ -13,7 +13,7 @@ $config['facebook_login_type']          = 'web';
 $config['facebook_login_redirect_url']  = 'user';
 $config['facebook_logout_redirect_url'] = 'user/fbLogout';
 $config['facebook_permissions']         = array('email');
-$config['facebook_graph_version']       = 'v2.6';
+$config['facebook_graph_version']       = 'v2.10';
 $config['facebook_auth_on_load']        = TRUE;
 
 
@@ -23,7 +23,10 @@ $config['facebook_auth_on_load']        = TRUE;
 |--------------------------------------------------------------------------
 */
 $config['google_id'] = '152390454137-9956crsv8lbnu614i6oc6iu3medsqsbo.apps.googleusercontent.com';
-$config['google_secret'] = '4TX3pyygp7D45Tb6CrdYfpQF';
+$config['google_secret'] = '3e9JffvdTxQItV0Jap1TmijA';
+$config['google_login_redirect_url']  = 'user';
+$config['google_application_name']  = 'Codeigniter Login';
+$config['google_logout_redirect_url'] = 'user/ggLogout';
 
 
 

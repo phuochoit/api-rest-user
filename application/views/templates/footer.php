@@ -5,7 +5,7 @@
 
     <script>
         $(document).ready(function() {
-             var flag = true;
+            var flag = true;
             function isEmailOrPhone(email) {
                 var expression = /([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$)|((?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$)/;
                 if (expression.test(email)) {

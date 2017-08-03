@@ -1,19 +1,28 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <h2 class="title">Đăng Nhập</h2>
-
+        <div class="col-sm-12 col-md-6">
+            <?php
+                if(isset($FBdata) && !empty($FBdata['authUrl'])) {
+                    echo '<a href="'.htmlspecialchars($FBdata['authUrl']).'"><img src="'.base_url('assets/images/facebook-login.png').'" alt=""/></a>';
+                }else{
+                    echo '<a href="'.htmlspecialchars($FBdata['logoutUrl']).'"><img src="'.base_url('assets/images/facebook-login.png').'" alt=""/></a>';
+                }
+            ?>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <?php
+                if(isset($GGdata) && !empty($GGdata['authUrl'])) {
+                    echo '<a href="'.$GGdata['authUrl'].'"><img src="'.base_url('assets/images/glogin.png').'" alt=""/></a>';
+                }else{
+                    echo '<a href="'.htmlspecialchars($GGdata['logoutUrl']).'"><img src="'.base_url('assets/images/glogin.png').'" alt=""/></a>';
+                }
+            ?>
+        </div>
         <?php
-            if(!empty($FBdata['authUrl'])) {
-                echo '<a href="'.htmlspecialchars($FBdata['authUrl']).'"><img src="'.base_url('assets/image/facebook-login.png').'" alt=""/></a>';
-            }else{
-                echo '<a href="'.htmlspecialchars($FBdata['logoutUrl']).'"><img src="'.base_url('assets/image/facebook-login.png').'" alt=""/></a>';
-            }
+            $attributes = array('class' => 'form-horizontal', 'id' => 'login');
+            print form_open('login', $attributes);
         ?>
-
-        <?php
-        $attributes = array('class' => 'form-horizontal', 'id' => 'login');
-        print form_open('login', $attributes);
-?>
             <div class="form-group">
                 <div class="col-sm-12 col-md-12">
                     <input type="text" class="form-control" id="ipphoneormail" placeholder="Số Điện Thoại Hoặc Email" name="phoneormail" >
