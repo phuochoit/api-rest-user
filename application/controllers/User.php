@@ -7,16 +7,17 @@ class User extends MY_Controller
     {
         parent::__construct();
         $this->load->library('facebook');
-//         $this->session->sess_destroy();
-//         print '<pre>';		
-//  -      print_r($this->session->all_userdata());		
-//  -      print '</pre>';
-        
     }
+    // load default code 
     public function index()
     {
+        // get data login with facebook
         $dataFB = $this->fbLogin();
+
+        // get data login with google
         $dataGG = $this->ggLogin();
+
+        // Preparing data to view
         $data = array(
             'FBdata' => $dataFB,
             'GGdata' => $dataGG
@@ -27,7 +28,8 @@ class User extends MY_Controller
         $this->page = "User/Login";
         $this->layout();
     }
-
+    
+    // login with google
     public function ggLogin(){
        
         $this->load->config('oauth');
@@ -51,20 +53,25 @@ class User extends MY_Controller
         // set data user array
         $userData = array();
 
+        // check request code 
         if (isset($_REQUEST['code'])) {
             $gClient->authenticate();
             $this->session->set_userdata('gg_token_login', $gClient->getAccessToken());
             redirect($redirectUrl);
         }
 
+        // check token login with google
         $token = $this->session->userdata('gg_token_login');
         if (!empty($token)) {
             $gClient->setAccessToken($token);
         }
 
+        // check access token 
         if ($gClient->getAccessToken()) {
+            // get profile with google
             $userProfile = $google_oauthV2->userinfo->get();
-            // Preparing data for database insertion
+
+            // Preparing data
             $userGGData['oauth_provider'] = 'google';
             $userGGData['oauth_uid'] = $userProfile['id'];
             $userGGData['first_name'] = $userProfile['given_name'];
@@ -74,31 +81,35 @@ class User extends MY_Controller
             $userGGData['locale'] = $userProfile['locale'];
             $userGGData['profile_url'] = $userProfile['link'];
             $userGGData['picture_url'] = $userProfile['picture'];
-
+            
+            // check data
             if(!empty($userGGData)){
                 $ggUserData =  array('gg_data_login' => $userGGData);
                 $this->session->set_userdata($ggUserData);
             }
-            
+            // get logout url
             $userData['logoutUrl'] = $this->config->item('google_logout_redirect_url');
 
         } else {
+              // get login url
             $userData['authUrl'] = $gClient->createAuthUrl();
         }
 
         return $userData;
     }
 
-
+    // login with facebook
     public function fbLogin(){
-
+        // set data user array
         $userData = array();
         $userFBData = array();
+        
+        // check use authenticated
         if($this->facebook->is_authenticated()){
             // Get user facebook profile details
             $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
 
-            // Preparing data for database insertion
+            // Preparing data
             $userFBData['oauth_provider'] = 'facebook';
             $userFBData['oauth_uid'] = $userProfile['id'];
             $userFBData['first_name'] = $userProfile['first_name'];
@@ -126,6 +137,7 @@ class User extends MY_Controller
         return $userData;
     }
     
+    // logout with facebook
     public function fbLogout() {
         // Remove local Facebook session
         $this->facebook->destroy_session();
@@ -133,6 +145,8 @@ class User extends MY_Controller
         $this->session->unset_userdata('fb_data_login');
         redirect('/user');
     }
+    
+    // Logout with google
     public function ggLogout() {
         // Remove google user data from session
 		$this->session->unset_userdata('gg_token_login');
