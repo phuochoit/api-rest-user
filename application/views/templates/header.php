@@ -7,6 +7,14 @@
         <link href="<?php print base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet">
         <link href="<?php print base_url("assets/css/style.css");?>" rel="stylesheet">
         <link href="<?php print base_url("assets/css/reponsize.css");?>" rel="stylesheet">
+
+        <?php if (isset($css_to_load) && $css_to_load != '') : ?>
+            <?php foreach ($css_to_load as $row) :?>
+                <link href="<?php print $row;?>" rel="stylesheet">
+            <?php endforeach;?>
+        <?php endif;?>
+        
+        <script src="<?php print base_url("assets/js/jquery.min.js");?>"></script>
     </head>
 
     <?php

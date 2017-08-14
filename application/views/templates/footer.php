@@ -1,8 +1,12 @@
 
     </div>
-    <script src="<?php print base_url("assets/js/jquery.min.js");?>"></script>
+    
     <script src="<?php print base_url("assets/js/bootstrap.min.js");?>"></script>
-
+    <?php if (isset($js_to_load) && $js_to_load != '') : ?>
+        <?php foreach ($js_to_load as $row) :?>
+        <script type="text/javascript" src="<?php print $row;?>"></script>
+        <?php endforeach;?>
+    <?php endif;?>
     <script>
         $(document).ready(function() {
             var flag = true;

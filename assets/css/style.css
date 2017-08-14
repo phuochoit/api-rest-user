@@ -16,7 +16,8 @@
 }
 .page-signup,
 .page-user,
-.page-upload  {
+.page-upload,
+.page-autocomplete  {
     background: #e9ebee none repeat scroll 0 0;
 }
 .page-upload{
@@ -28,6 +29,11 @@
     font-size: 18px;
     height: 40px;
 }
+.autocomplete-wraper {
+    text-align: center;
+    margin: 15% auto;
+}
+
 .page-signup #signup .bg-danger,
 #login .bg-danger {
     margin-top: 5px;
