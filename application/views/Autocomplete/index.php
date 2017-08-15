@@ -6,7 +6,7 @@
         <form>
             <div class="form-group col-md-6 col-md-offset-3">
                 <label for="tags">Tags: </label>
-                <input id="tags" name="tags" class="form-control">
+                <input id="tags" name="tags" class="form-control tags-ip">
             </div>
             <div class="form-group col-md-6 col-md-offset-3">
                 <button type="button" class="btn btn-default" type="submit" id="btn-submit">Default</button>

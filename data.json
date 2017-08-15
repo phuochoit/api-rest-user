@@ -33,7 +33,7 @@
     },
     {
         "id": 5,
-        "first_name": "Phước",
+        "first_name": "Hồ Phước",
         "last_name": "Hồ",
         "email": "phuocck8@gmail.com",
         "gender": "Male",
@@ -41,7 +41,7 @@
     },
     {
         "id": 6,
-        "first_name": "Huy",
+        "first_name": "Lý Quốc Huy",
         "last_name": "Ly Quốc",
         "email": "lyquochuy@gmail.com",
         "gender": "Male",
@@ -49,7 +49,7 @@
     },
     {
         "id": 7,
-        "first_name": "Trang",
+        "first_name": "Nguyễn Trang",
         "last_name": "Nguyễn",
         "email": "nguyentrang@gmail.com",
         "gender": "Female",
