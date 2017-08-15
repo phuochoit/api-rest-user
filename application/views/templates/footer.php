@@ -8,6 +8,54 @@
         <?php endforeach;?>
     <?php endif;?>
     <script>
+        $(function() {
+            var data = '';
+            var suggestion = $.parseJSON(<?php print $datajs;?>);
+            function split( val ) {
+                return val.split( /,\s*/ );
+            }
+            $('#tags').autocomplete({
+                minLength: 1,
+                source: function(request, response) {          
+                    var data = $.grep(suggestion, function(value) {
+                        return value.first_name.substring(0, request.term.length).toLowerCase() == request.term.toLowerCase();
+                    });            
+                    response(data); 
+                },
+                focus: function() {
+                    return false;
+                },
+                select: function( event, ui ) {
+                    var terms = split( this.value );
+                    var selected_value = ui.item.first_name;
+                    $('#tags').val(selected_value);
+                    data = ui.item;
+                    return false;
+                }
+
+            }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "ui-autocomplete-item", item ) 
+                .append( "<a>" + item.first_name + "</a>" ) 
+                .appendTo( ul ); 
+            };
+            $('#btn-submit').click(function () {
+                $( ".first-name" ).empty();
+                $( ".last-name" ).empty();
+                $( ".email" ).empty();
+                $( ".gender" ).empty();
+                if(data != '' && data != 'undefined'){
+                    $( ".first-name" ).append("<p><b>First Name:</b> " + data['first_name'] + "</p>");
+                    $( ".last-name" ).append("<p><b>Last Name:</b> " + data['last_name'] + "</p>");
+                    $( ".email" ).append("<p><b>Email:</b> " + data['email'] + "</p>");
+                    $( ".gender" ).append("<p><b>Gender:</b> " + data['gender'] + "</p>");
+                }
+            
+            });
+            
+        });
+    </script>
+    <script>
         $(document).ready(function() {
             var flag = true;
             function isEmailOrPhone(email) {

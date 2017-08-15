@@ -6,13 +6,12 @@ class Autocomplete extends MY_Controller
     /*Load Default*/
     public function index()
     {
-
         $files = file_get_contents(base_url('data.json'));
-
+       
         // set data to view
         $data = array(
             'title'         => 'Autocomplete',
-            'datajs'        => $files,
+            'datajs'        => json_encode($files),
             'js_to_load'    => array(
                 base_url("assets/js/jquery-ui.js"),
             ),
