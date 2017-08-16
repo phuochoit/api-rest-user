@@ -25,4 +25,6 @@ class Autocomplete extends MY_Controller
         $this->page = "Autocomplete/index";
         $this->layout();
     }
+
+   
 }

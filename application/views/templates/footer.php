@@ -7,74 +7,76 @@
         <script type="text/javascript" src="<?php print $row;?>"></script>
         <?php endforeach;?>
     <?php endif;?>
-    <script>
-        $(function() {
-            var data = '';
-            var suggestion = $.parseJSON(<?php print $datajs;?>);
-            function split( val ) {
-                return val.split( /,\s*/ );
-            }
-            function ununicode(str) {
-                str= str.toLowerCase();  
-                str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");  
-                // alert(str);
-                str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");  
-                str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");  
-                str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");  
-                str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");  
-                str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");  
-                str= str.replace(/đ/g,"d");  
-                str= str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,"-"); 
-                str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1- 
-                str= str.replace(/^\-+|\-+$/g,"");  
-                return str;  
-            }
-
-            $('#tags').autocomplete({
-                minLength: 1,
-                source: function(request, response) {          
-                    var data = $.grep(suggestion, function(value) {
-                        var patt = new RegExp(ununicode(request.term.replace(/ /g, '-')));
-					    var res = patt.test(ununicode(value.first_name));
-					    return res;
-
-                    }); 
-       
-                    response(data); 
-                },
-                focus: function() {
-                    return false;
-                },
-                select: function( event, ui ) {
-                    var terms = split( this.value );
-                    var selected_value = ui.item.first_name;
-                    $('#tags').val(selected_value);
-                    data = ui.item;
-                    return false;
+    <?php if(isset($datajs) && !empty($datajs)):?>
+        <script>
+            $(function() {
+                var data = '';
+                var suggestion = $.parseJSON(<?php print $datajs;?>);
+                function split( val ) {
+                    return val.split( /,\s*/ );
+                }
+                function ununicode(str) {
+                    str= str.toLowerCase();  
+                    str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");  
+                    // alert(str);
+                    str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");  
+                    str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");  
+                    str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");  
+                    str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");  
+                    str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");  
+                    str= str.replace(/đ/g,"d");  
+                    str= str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,"-"); 
+                    str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1- 
+                    str= str.replace(/^\-+|\-+$/g,"");  
+                    return str;  
                 }
 
-            }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "ui-autocomplete-item", item ) 
-                .append( "<a>" + item.first_name + "</a>" ) 
-                .appendTo( ul ); 
-            };
-            $('#btn-submit').click(function () {
-                $( ".first-name" ).empty();
-                $( ".last-name" ).empty();
-                $( ".email" ).empty();
-                $( ".gender" ).empty();
-                if(data != '' && data != 'undefined'){
-                    $( ".first-name" ).append("<p><b>First Name:</b> " + data['first_name'] + "</p>");
-                    $( ".last-name" ).append("<p><b>Last Name:</b> " + data['last_name'] + "</p>");
-                    $( ".email" ).append("<p><b>Email:</b> " + data['email'] + "</p>");
-                    $( ".gender" ).append("<p><b>Gender:</b> " + data['gender'] + "</p>");
-                }
-            
+                $('#tags').autocomplete({
+                    minLength: 1,
+                    source: function(request, response) {          
+                        var data = $.grep(suggestion, function(value) {
+                            var patt = new RegExp(ununicode(request.term.replace(/ /g, '-')));
+                            var res = patt.test(ununicode(value.first_name));
+                            return res;
+
+                        }); 
+        
+                        response(data); 
+                    },
+                    focus: function() {
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        var selected_value = ui.item.first_name;
+                        $('#tags').val(selected_value);
+                        data = ui.item;
+                        return false;
+                    }
+
+                }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+                    return $( "<li></li>" )
+                    .data( "ui-autocomplete-item", item ) 
+                    .append( "<a>" + item.first_name + "</a>" ) 
+                    .appendTo( ul ); 
+                };
+                $('#btn-submit').click(function () {
+                    $( ".first-name" ).empty();
+                    $( ".last-name" ).empty();
+                    $( ".email" ).empty();
+                    $( ".gender" ).empty();
+                    if(data != '' && data != 'undefined'){
+                        $( ".first-name" ).append("<p><b>First Name:</b> " + data['first_name'] + "</p>");
+                        $( ".last-name" ).append("<p><b>Last Name:</b> " + data['last_name'] + "</p>");
+                        $( ".email" ).append("<p><b>Email:</b> " + data['email'] + "</p>");
+                        $( ".gender" ).append("<p><b>Gender:</b> " + data['gender'] + "</p>");
+                    }
+                
+                });
+                
             });
-            
-        });
-    </script>
+        </script>
+    <?php endif;?>
     <script>
         $(document).ready(function() {
             var flag = true;

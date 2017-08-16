@@ -15,6 +15,9 @@
         <?php endif;?>
         
         <script src="<?php print base_url("assets/js/jquery.min.js");?>"></script>
+        <script>
+            var base_url = "<?php print base_url();?>";
+        </script>
     </head>
 
     <?php
